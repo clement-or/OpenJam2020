@@ -2,6 +2,7 @@
 
 ## Arborescence du projet
 
+```
 .
 ├── nodes /
 │   └── example_node/
@@ -14,12 +15,13 @@
 ├── scenes
 ├── scripts
 └── singletons
+```
 
-nodes : Nodes qui seront instanciés dans une scène (Player, Enemy, etc.)
-resources : Contenus du jeu (audio, images...)
-scenes : Scènes qui seront dans le jeu (TestScene, Game, Level...)
-scripts : Scripts indépendants
-singletons : Singletons
+* nodes : Nodes qui seront instanciés dans une scène (Player, Enemy, etc.)
+* resources : Contenus du jeu (audio, images...)
+* scenes : Scènes qui seront dans le jeu (TestScene, Game, Level...)
+* scripts : Scripts indépendants
+* singletons : Singletons
 
 ## Règles de nommage
 
