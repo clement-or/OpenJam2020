@@ -40,7 +40,7 @@ Les fonctions "privées" commencent par un _. Une fonction privée est prévue p
 
 Si possible, utiliser le typage statique de Godot pour bénéficier de l'autocomplétion
 
-```
+```gd
     # Variable de type Vector2
     var ma_variable : Vector2
     
@@ -61,7 +61,7 @@ Utiliser un maximum les signaux pour transmettre des infos entre les nodes.
 Utiliser des `assert()` dans le code, pour vérifier qu'une variable est bien assignée si elle est nécessaire au fonctionnement du node.
 `assert` renvoie une erreur si la variable n'est pas assignée, uniquement en mode éditeur.
 
-```
+```gd
     onready var grid = get_parent()
     
     func _ready():
@@ -72,7 +72,7 @@ Utiliser des `assert()` dans le code, pour vérifier qu'une variable est bien as
 
 Précéder l'entête d'une fonction d'un commentaire expliquant son fonctionnement ainsi que ses paramètres, quand nécessaire
 
-```
+```gd
     # Demande à la Grid parente si une cellule est libre
     # x : Coordonnée X de la cellule
     # y : Coordonnée Y de la cellule
