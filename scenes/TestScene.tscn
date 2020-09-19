@@ -1,26 +1,69 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://nodes/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://nodes/ui/flight_bar/FlightBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://nodes/Flower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 501.278, 65.6769 )
+extents = Vector2( 1027.49, 65.6769 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32.358, 31.6126 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Nouvelle animation"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1414.75, 459.704 ), Vector2( 1621.37, 459.704 ), Vector2( 1414.75, 459.704 ) ]
+}
 
 [node name="TestScene" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 488.764, 149.84 )
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 532.765, 556.549 )
+position = Vector2( 986.849, 1040.91 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -17.8381, -27.3517 )
 shape = SubResource( 1 )
 
 [node name="ProgressBar" parent="." instance=ExtResource( 2 )]
-margin_left = 875.655
-margin_top = 18.6878
-margin_right = 1007.65
-margin_bottom = 32.6878
+margin_left = 579.0
+margin_top = 19.0
+margin_right = 1306.0
+margin_bottom = 63.0
 player_path = NodePath("../Player")
+
+[node name="Flower" parent="." instance=ExtResource( 3 )]
+position = Vector2( 438.367, 1424.88 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 929.736, 227.955 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 1414.75, 459.704 )
+mode = 3
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RigidBody2D"]
+autoplay = "Nouvelle animation"
+"anims/Nouvelle animation" = SubResource( 3 )
+[connection signal="has_been_entered" from="Flower" to="Player" method="_on_Flower_entered"]
