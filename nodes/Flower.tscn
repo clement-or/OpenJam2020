@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/flower/Flower.gd" type="Script" id=1]
+[ext_resource path="res://resources/sprites/placeholders/stem.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprites/placeholders/flowerHead.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 375.794
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 54.1404
+height = 329.362
+
+[node name="Flower" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Stem" type="Polygon2D" parent="."]
+offset = Vector2( -15, -900 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( -7.62939e-006, 900, 0, 0, 25, 0, 25, 900, 0, 800, 25, 800, 25, 700, 0, 700, 0, 600, 25, 600, 0, 500, 0, 500, 25, 500, 25, 400, 0, 400, 25, 300, 0, 300, 25, 200, 0, 200, 25, 100, 0, 100 )
+uv = PoolVector2Array( -10, 0, 0, 0, 20, 0, 20, 0, 0, 800, 25, 800, 25, 700, 0, 700, 0, 600, 25, 600, 0, 500, 0, 500, 25, 500, 25, 400, 0, 400, 25, 300, 0, 300, 25, 200, 0, 200, 25, 100, 0, 100 )
+bones = [ NodePath("Bone1"), PoolRealArray( 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0, 0, 0, 0, 0, 0 ), NodePath("Bone1/Bone2"), PoolRealArray( 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 ), NodePath("Bone1/Bone2/Bone3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+internal_vertex_count = 17
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone1" type="Bone2D" parent="Skeleton2D"]
+rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Bone2" type="Bone2D" parent="Skeleton2D/Bone1"]
+position = Vector2( 0, -495.557 )
+rest = Transform2D( 1, 0, 0, 1, 0, -495.557 )
+
+[node name="Bone3" type="Bone2D" parent="Skeleton2D/Bone1/Bone2"]
+position = Vector2( 0, -402.805 )
+rest = Transform2D( 1, 0, 0, 1, 0, -402.805 )
+
+[node name="Head" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 0, -896.177 )
+
+[node name="Sprite" type="Sprite" parent="Head"]
+texture = ExtResource( 3 )
+
+[node name="Area" type="Area2D" parent="Head"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/Area"]
+shape = SubResource( 3 )
+
+[node name="HardSurface" type="StaticBody2D" parent="Head"]
+
+[node name="Collision" type="CollisionShape2D" parent="Head/HardSurface"]
+position = Vector2( 0, 105.485 )
+rotation = 1.57079
+shape = SubResource( 2 )
+
+[node name="RenewNectarTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="BeeGleaningPosition" type="Position2D" parent="."]
+position = Vector2( 0, -927.263 )
+[connection signal="timeout" from="RenewNectarTimer" to="." method="_on_RenewNectarTimer_timeout"]
