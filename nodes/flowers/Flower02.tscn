@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://nodes/flowers/Flower02.gd" type="Script" id=1]
+[ext_resource path="res://nodes/flowers/Leaves.gd" type="Script" id=2]
+[ext_resource path="res://nodes/flowers/Leaf.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/sprites/placeholders/stem.png" type="Texture" id=4]
+[ext_resource path="res://nodes/flowers/Skeleton2D.gd" type="Script" id=5]
+[ext_resource path="res://resources/sprites/placeholders/flower02.png" type="Texture" id=6]
+[ext_resource path="res://resources/animation/FlowerIdleMove.tres" type="Animation" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 375.794
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 54.1404
+height = 329.362
+
+[sub_resource type="Animation" id=3]
+
+[node name="Flower" type="Node2D"]
+scale = Vector2( 1, 1.00295 )
+script = ExtResource( 1 )
+
+[node name="Leaves" type="Node2D" parent="."]
+script = ExtResource( 2 )
+leaf = ExtResource( 3 )
+
+[node name="Stem" type="Polygon2D" parent="."]
+offset = Vector2( -15, -900 )
+texture = ExtResource( 4 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 25, 900, 0, 900, 0, 550, 0, 250, 0, 100, 0, 0, 25, 0, 25, 100, 25, 250, 25, 550 )
+uv = PoolVector2Array( 25, 900, 0, 900, 0, 550, 0, 300, 0, 150, 0, 0, 25, 0, 25, 100, 25, 250, 25, 500 )
+bones = [ NodePath("Bone1"), PoolRealArray( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Bone1/Bone2"), PoolRealArray( 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 ), NodePath("Bone1/Bone2/Bone3"), PoolRealArray( 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 ), NodePath("Bone1/Bone2/Bone3/Bone4"), PoolRealArray( 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ), NodePath("Bone1/Bone2/Bone3/Bone4/Bone5"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Bone1" type="Bone2D" parent="Skeleton2D"]
+rotation = -0.00800635
+rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Bone2" type="Bone2D" parent="Skeleton2D/Bone1"]
+position = Vector2( 0, -351.384 )
+rotation = -0.00945224
+rest = Transform2D( 1, 0, 0, 1, 0, -350 )
+
+[node name="Bone3" type="Bone2D" parent="Skeleton2D/Bone1/Bone2"]
+position = Vector2( 0, -302.581 )
+rotation = -0.00643539
+rest = Transform2D( 1, 0, 0, 1, 0, -300 )
+
+[node name="Bone4" type="Bone2D" parent="Skeleton2D/Bone1/Bone2/Bone3"]
+position = Vector2( 0, -150 )
+rotation = -0.00727179
+rest = Transform2D( 1, 0, 0, 1, 0, -150 )
+
+[node name="Bone5" type="Bone2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4"]
+position = Vector2( 0.185364, -94.8203 )
+rotation = 0.0193062
+rest = Transform2D( 1, 0, 0, 1, 0, -100 )
+
+[node name="Head" type="Node2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5"]
+
+[node name="BeeGleaningPosition" type="Position2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head"]
+position = Vector2( -0.185364, -28.4775 )
+
+[node name="Sprite" type="Sprite" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head"]
+position = Vector2( 1.11012, 31.0845 )
+scale = Vector2( 0.754066, 0.754066 )
+texture = ExtResource( 6 )
+
+[node name="Area" type="Area2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head/Area"]
+shape = SubResource( 1 )
+
+[node name="HardSurface" type="StaticBody2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head"]
+editor/display_folded = true
+
+[node name="Collision" type="CollisionShape2D" parent="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head/HardSurface"]
+position = Vector2( 0, 105.485 )
+rotation = 1.57079
+shape = SubResource( 2 )
+
+[node name="RenewNectarTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "FlowerIdleMove"
+anims/FlowerIdleMove = ExtResource( 7 )
+anims/IdleStop = SubResource( 3 )
+[connection signal="create_leaf" from="Leaves" to="Skeleton2D" method="_on_Leaves_create_leaf"]
+[connection signal="body_entered" from="Skeleton2D/Bone1/Bone2/Bone3/Bone4/Bone5/Head/Area" to="." method="_on_Area_body_entered"]
+[connection signal="timeout" from="RenewNectarTimer" to="." method="_on_RenewNectarTimer_timeout"]

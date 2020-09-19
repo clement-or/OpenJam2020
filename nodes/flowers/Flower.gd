@@ -1,31 +1,36 @@
 extends Node2D
 signal has_been_entered(flower_encountered)
 
-var id = "flower01"
-var flower_name = "" #Valeur ajoutée à l'avenir avec un tableau de valeur
-var nectar = { #Les valeurs du nectar seront récupérées en fonction de l'ID de la fleur dans un tableau de valeur
-	"name": "base_nectar",
-	"value": 1,
-	"color": Color("#a5da00")
+var id = "BASE"
+var flower_name = "BASE"
+var flower_visual_path = "res://resources/sprites/placeholders/flowerHead.png"
+var nectar = {
+	"name": "BASE",
+	"value": 0,
+	"color": Color(255,255,255)
 	}
-#var stem_height = 400 #Pas sûr de l'utilité, garder ça dans le coin de la tête
+var stem_height = 900
 var is_polinised = true
 var is_gleaned = false
-var visible_leaves = []
+var can_have_leaves = true
 
 
-func _ready():
-	$Leaves.setup()
-	var a_leaf_id = 0
-	for a_leaf in $Leaves.get_children() :
-		match(a_leaf_id): #BROKEN
-			0: $Skeleton2D/Bone1.add_child($Leaves.get_child(a_leaf_id))
-			1: $Skeleton2D/Bone1/Bone2.add_child($Leaves.get_child(a_leaf_id))
-			2: $Skeleton2D/Bone1/Bone2/Bone3.add_child($Leaves.get_child(a_leaf_id))
-			3: $Skeleton2D/Bone1.add_child($Leaves.get_child(a_leaf_id))
-			4: $Skeleton2D/Bone1/Bone2.add_child($Leaves.get_child(a_leaf_id))
-			5: $Skeleton2D/Bone1/Bone2/Bone3.add_child($Leaves.get_child(a_leaf_id))
-		
+func set_variables(var i, var f_n, var nctr, var st_hgt, var c_h_l):
+	id = i
+	flower_name = f_n
+	nectar = nctr
+	stem_height = st_hgt
+	can_have_leaves = c_h_l
+	$Leaves.setup(can_have_leaves, id)
+	randomize()
+	var rand = rand_range(0.8,1.4)
+	$Anim.set_speed_scale(rand)
+	set_height()
+
+func set_height():
+	randomize()
+	var new_scale = 1.0/(900.0/stem_height) + rand_range(-0.1,0.1)
+	self.set_scale(Vector2(new_scale, new_scale))
 
 func _on_RenewNectarTimer_timeout():
 	is_gleaned = false
