@@ -15,18 +15,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ParallaxBackground" parent="."]
+[node name="Parallax" type="ParallaxBackground" parent="."]
 
-[node name="background" type="ParallaxLayer" parent="Background"]
+[node name="BackgroundPannel" type="ParallaxLayer" parent="Parallax"]
 motion_scale = Vector2( 0, 0.1 )
 
-[node name="Sprite" type="Sprite" parent="Background/background"]
+[node name="Background" type="Sprite" parent="Parallax/BackgroundPannel"]
 texture = ExtResource( 1 )
 
-[node name="middleground" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2( 0.3, 0.2 )
+[node name="MiddelgroundPannel" type="ParallaxLayer" parent="Parallax"]
+motion_scale = Vector2( 1, 0.2 )
 motion_mirroring = Vector2( 3000, 0 )
 
-[node name="Sprite" type="Sprite" parent="Background/middleground"]
+[node name="Middleground" type="Sprite" parent="Parallax/MiddelgroundPannel"]
 position = Vector2( 0, 330 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 1500 )
