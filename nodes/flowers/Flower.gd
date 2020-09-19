@@ -11,6 +11,21 @@ var nectar = { #Les valeurs du nectar seront récupérées en fonction de l'ID d
 #var stem_height = 400 #Pas sûr de l'utilité, garder ça dans le coin de la tête
 var is_polinised = true
 var is_gleaned = false
+var visible_leaves = []
+
+
+func _ready():
+	$Leaves.setup()
+	var a_leaf_id = 0
+	for a_leaf in $Leaves.get_children() :
+		match(a_leaf_id): #BROKEN
+			0: $Skeleton2D/Bone1.add_child($Leaves.get_child(a_leaf_id))
+			1: $Skeleton2D/Bone1/Bone2.add_child($Leaves.get_child(a_leaf_id))
+			2: $Skeleton2D/Bone1/Bone2/Bone3.add_child($Leaves.get_child(a_leaf_id))
+			3: $Skeleton2D/Bone1.add_child($Leaves.get_child(a_leaf_id))
+			4: $Skeleton2D/Bone1/Bone2.add_child($Leaves.get_child(a_leaf_id))
+			5: $Skeleton2D/Bone1/Bone2/Bone3.add_child($Leaves.get_child(a_leaf_id))
+		
 
 func _on_RenewNectarTimer_timeout():
 	is_gleaned = false
