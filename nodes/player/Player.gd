@@ -10,11 +10,14 @@ export var h_max_speed = 150
 
 # La valeur de vol 
 export var max_flight = 100
+export var refill_rate = 1
 var cur_flight = 100
 
 # La vélocité de l'abeille
 var velocity = Vector2.ZERO
 var acceleration = Vector2.ZERO
+
+var cur_pollen = {"name": "", "value": 0, "color": null} setget set_cur_pollen
 
 
 func _ready():
@@ -23,6 +26,11 @@ func _ready():
 func _process(delta):
 	_movement()
 	_animation()
+	if is_on_floor():
+		cur_flight += refill_rate
+		cur_flight = clamp(cur_flight, 0, max_flight)
+	print(is_on_floor())
+
 
 
 func _movement():
@@ -51,18 +59,35 @@ func _movement():
 	velocity.x = clamp(velocity.x, -h_max_speed, h_max_speed)
 	
 	# Gravité
-	if (!is_on_floor()):
-		velocity.y += gravity
+	#if (!is_on_floor()):
+	velocity.y += gravity
 	
 	# Appliquer le mouvement
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	# Dessiner les choses définies dans la fonction _draw()
 	update()
 
-
 func _animation():
 	$Sprite.flip_h = velocity.x < 0
+
+
+# Donner/retirer un pollen à l'abeille. Start les particules et joue un petit "burst"
+func set_cur_pollen(var pollen : Dictionary):
+	$PollenFall.emitting = pollen.name
+	
+	# Si on ajoute un pollen à l'abeille
+	if pollen.get("name"):
+		
+		$PollenBurst.self_modulate = pollen.color
+		$PollenFall.self_modulate = pollen.color
+		$PollenBurst.emitting = true
+	# Sinon, faire en sorte qu'on enlève le pollen à l'abeille
+	# Si un pollen n'a pas de nom, on considère que l'abeille n'a pas de pollen
+	else:
+		cur_pollen = {"name": "", "value": 0, "color": null}
+
+
 
 func _draw():
 	return
