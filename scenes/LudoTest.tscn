@@ -1,13 +1,21 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://nodes/flowers/Flower.tscn" type="PackedScene" id=1]
+[ext_resource path="res://nodes/flowers/Flower01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://nodes/flowers/Flower02.tscn" type="PackedScene" id=2]
+[ext_resource path="res://nodes/flowers/Flower03.tscn" type="PackedScene" id=3]
 
 [node name="LudoTest" type="Node2D"]
 
-[node name="Flower" parent="." instance=ExtResource( 1 )]
-position = Vector2( 441.748, 589.163 )
-scale = Vector2( 0.403835, 0.403835 )
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1048.44, 442.31 )
+current = true
+zoom = Vector2( 4, 4 )
 
-[node name="Flower2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 71.624, 571.631 )
-scale = Vector2( 0.403835, 0.403835 )
+[node name="Flower" parent="." instance=ExtResource( 1 )]
+position = Vector2( 224.072, 999.151 )
+
+[node name="Flower2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 980.827, 951.885 )
+
+[node name="Flower3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1643.67, 925.125 )
