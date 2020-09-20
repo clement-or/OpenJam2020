@@ -1,0 +1,246 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://resources/sprites/landscape/background.png" type="Texture" id=1]
+[ext_resource path="res://resources/sprites/landscape/middleground.png" type="Texture" id=2]
+[ext_resource path="res://resources/fonts/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://resources/sprites/bee.png" type="Texture" id=4]
+[ext_resource path="res://resources/sprites/placeholders/menuPage.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Menu.gd" type="Script" id=6]
+[ext_resource path="res://resources/fonts/segoesc.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=2]
+size = 158
+outline_size = 10
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 9.73349, 0.0 ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
+font_data = ExtResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+gravity = Vector3( 50, -30, 0 )
+initial_velocity = 50.0
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 1.0
+color = Color( 0.92549, 0.886275, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+gravity = Vector3( 50, 30, 0 )
+initial_velocity = 50.0
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 1.0
+color = Color( 0.92549, 0.886275, 0, 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -794.862
+margin_right = 960.0
+margin_bottom = 627.138
+rect_scale = Vector2( 1.08775, 1.08775 )
+texture = ExtResource( 1 )
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1500.0
+margin_top = -708.069
+margin_right = 1500.0
+margin_bottom = 791.931
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_top = 107.157
+margin_bottom = 298.157
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+text = "Origabee"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 236.416
+margin_top = -674.343
+margin_right = 626.417
+margin_bottom = -361.343
+rect_rotation = 9.73316
+rect_pivot_offset = Vector2( 257.318, 178.668 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TextureRect"]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+
+[node name="Menu" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -929.815
+margin_top = -721.37
+margin_right = 179.185
+margin_bottom = 30.6302
+rect_rotation = -3.0
+rect_pivot_offset = Vector2( 1068.34, 768.166 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu"]
+margin_left = 250.0
+margin_top = 145.0
+margin_right = 858.0
+margin_bottom = 607.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Start" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 134.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Menu/VBoxContainer/Start"]
+margin_left = 157.0
+margin_right = 157.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( -0.949463, 71.093 )
+
+[node name="Start" type="Button" parent="CanvasLayer/Menu/VBoxContainer/Start"]
+margin_left = 197.0
+margin_right = 411.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.47451, 0.596078, 0, 1 )
+text = "Start"
+flat = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/Menu/VBoxContainer/Start"]
+margin_left = 451.0
+margin_right = 451.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( -1.20874, 73.8137 )
+
+[node name="HowToPlay" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer"]
+editor/display_folded = true
+margin_top = 164.0
+margin_right = 608.0
+margin_bottom = 298.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Menu/VBoxContainer/HowToPlay"]
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( 0.968018, 66.2565 )
+
+[node name="HowToPlay" type="Button" parent="CanvasLayer/Menu/VBoxContainer/HowToPlay"]
+margin_left = 40.0
+margin_right = 568.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.47451, 0.596078, 0, 1 )
+text = "How to play"
+flat = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/Menu/VBoxContainer/HowToPlay"]
+margin_left = 608.0
+margin_right = 608.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( -1.76599, 64.8962 )
+
+[node name="Exit" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer"]
+editor/display_folded = true
+margin_top = 328.0
+margin_right = 608.0
+margin_bottom = 462.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Menu/VBoxContainer/Exit"]
+margin_left = 167.0
+margin_right = 167.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( -1.1897, 68.3404 )
+
+[node name="Exit" type="Button" parent="CanvasLayer/Menu/VBoxContainer/Exit"]
+margin_left = 207.0
+margin_right = 400.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.47451, 0.596078, 0, 1 )
+text = "Exit"
+flat = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/Menu/VBoxContainer/Exit"]
+margin_left = 440.0
+margin_right = 440.0
+margin_bottom = 134.0
+rect_pivot_offset = Vector2( -2.32324, 64.6392 )
+
+[node name="ParticuleLeft" type="Particles2D" parent="CanvasLayer/Menu"]
+visible = false
+rotation = -3.14159
+amount = 20
+process_material = SubResource( 5 )
+
+[node name="ParticuleRight" type="Particles2D" parent="CanvasLayer/Menu"]
+visible = false
+amount = 20
+process_material = SubResource( 4 )
+[connection signal="mouse_entered" from="CanvasLayer/Menu/VBoxContainer/Start/Start" to="CanvasLayer/Menu" method="_on_Start_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Menu/VBoxContainer/Start/Start" to="CanvasLayer/Menu" method="_on_button_mouse_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Menu/VBoxContainer/HowToPlay/HowToPlay" to="CanvasLayer/Menu" method="_on_HowToPlay_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Menu/VBoxContainer/HowToPlay/HowToPlay" to="CanvasLayer/Menu" method="_on_button_mouse_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Menu/VBoxContainer/Exit/Exit" to="CanvasLayer/Menu" method="_on_Exit_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Menu/VBoxContainer/Exit/Exit" to="CanvasLayer/Menu" method="_on_button_mouse_exit"]
