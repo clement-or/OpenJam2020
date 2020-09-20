@@ -26,6 +26,11 @@ window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemies"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
