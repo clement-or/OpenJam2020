@@ -4,8 +4,8 @@
 [ext_resource path="res://resources/sprites/landscape/middleground.png" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://resources/sprites/bee.png" type="Texture" id=4]
-[ext_resource path="res://scripts/Menu.gd" type="Script" id=5]
-[ext_resource path="res://resources/sprites/placeholders/menuPage.png" type="Texture" id=6]
+[ext_resource path="res://resources/sprites/placeholders/menuPage.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Menu.gd" type="Script" id=6]
 [ext_resource path="res://resources/fonts/segoesc.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=2]
@@ -108,45 +108,37 @@ margin_left = 236.416
 margin_top = -674.343
 margin_right = 626.417
 margin_bottom = -361.343
-rect_rotation = 9.66994
+rect_rotation = 9.73316
 rect_pivot_offset = Vector2( 257.318, 178.668 )
 texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TextureRect"]
 autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 
-[node name="Menu" type="Control" parent="CanvasLayer"]
+[node name="Menu" type="TextureRect" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -919.0
-margin_top = -743.0
-margin_right = 190.0
-margin_bottom = 9.0
+margin_left = -929.815
+margin_top = -721.37
+margin_right = 179.185
+margin_bottom = 30.6302
 rect_rotation = -3.0
 rect_pivot_offset = Vector2( 1068.34, 768.166 )
-script = ExtResource( 5 )
-
-[node name="Panel" type="TextureRect" parent="CanvasLayer/Menu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 55.0
-margin_bottom = 60.9999
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
+script = ExtResource( 6 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -387.123
-margin_top = -211.026
-margin_right = 180.877
-margin_bottom = 250.974
+margin_left = 250.0
+margin_top = 145.0
+margin_right = 858.0
+margin_bottom = 607.0
 custom_constants/separation = 30
 alignment = 1
 
@@ -238,7 +230,7 @@ rect_pivot_offset = Vector2( -2.32324, 64.6392 )
 
 [node name="ParticuleLeft" type="Particles2D" parent="CanvasLayer/Menu"]
 visible = false
-rotation = 3.14159
+rotation = -3.14159
 amount = 20
 process_material = SubResource( 5 )
 
