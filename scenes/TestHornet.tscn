@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://nodes/player/camera/Camera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://nodes/hornet/Hornet.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CenteredCam" parent="." instance=ExtResource( 1 )]
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( -623.629, -238.761 )
